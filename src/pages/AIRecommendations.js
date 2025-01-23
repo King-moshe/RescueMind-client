@@ -5,24 +5,40 @@ import ResultDisplay from "../components/camra-ai/ResultDisplay";
 
 export default function AIRecommendations() {
   const [prediction, setPrediction] = useState(null);
+  const [error, setError] = useState(null);
 
   const handleCapture = async (imageSrc) => {
     try {
+      setError(null);
       const formData = new FormData();
       formData.append('image', dataURItoBlob(imageSrc), 'capturedImage.jpg');
 
-      const res = await fetch("https://rescuemind-server.onrender.com/api/images/predict", {
+      // const res = await fetch("https://rescuemind-server.onrender.com/api/images/predict", {
+      //   method: 'POST',
+      //   body: formData,
+      // });
+
+      const res = await fetch("http://localhost:5000/api/images/predict", {
         method: 'POST',
         body: formData,
       });
 
+      if (!res.ok) {
+        throw new Error(`Server error: ${res.status}`);
+      }
+
       const data = await res.json();
-      setPrediction({
-        response: data.response,
-      });
-      
+
+      if (data.status === "success" && data.data && data.data.analysis) {
+        setPrediction({
+          response: data.data.analysis, // ניגש לשדה הנכון בתגובה
+        });
+      } else {
+        throw new Error("Invalid server response structure");
+      }
     } catch (error) {
       console.error("Error uploading image:", error);
+      setError("אירעה שגיאה בעיבוד התמונה. נסה שוב.");
     }
   };
 
@@ -40,8 +56,8 @@ export default function AIRecommendations() {
   return (
     <div className="p-4">
       <h2 className="text-2xl font-bold mb-4">המלצות מבוססות AI</h2>
-      <p>כאן יוצגו המלצות AI לטיפול מבוסס על מצב הפצוע.</p>
-       <CameraCapture onCapture={handleCapture} />
+      <CameraCapture onCapture={handleCapture} />
+      {error && <p className="text-red-500">{error}</p>}
       {prediction && <ResultDisplay prediction={prediction} />}
     </div>
   );

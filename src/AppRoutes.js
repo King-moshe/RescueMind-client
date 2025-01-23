@@ -18,10 +18,10 @@ export default function AppRoutes() {
         <Route path="/treatment-logs" element={<TreatmentLogs />} />
         <Route path="/ai-recommendations" element={<AIRecommendations />} />
         <Route path="/hospital-integration" element={<HospitalIntegration />} />
-        {/* <Route path="/patient-monitoring" element={<ProtectedRoute><PatientMonitoring /></ProtectedRoute>} />
-        <Route path="/treatment-logs" element={<ProtectedRoute><TreatmentLogs /></ProtectedRoute>} />
-        <Route path="/ai-recommendations" element={<ProtectedRoute><AIRecommendations /></ProtectedRoute>} />
-        <Route path="/hospital-integration" element={<ProtectedRoute><HospitalIntegration /></ProtectedRoute>} /> */}
+        {/* <Route path="/patient-monitoring" element={<ProtectedRoute><PatientMonitoring /></ProtectedRoute>} /> */}
+        {/* <Route path="/treatment-logs" element={<ProtectedRoute><TreatmentLogs /></ProtectedRoute>} /> */}
+        {/* <Route path="/ai-recommendations" element={<ProtectedRoute><AIRecommendations /></ProtectedRoute>} /> */}
+        {/* <Route path="/hospital-integration" element={<ProtectedRoute><HospitalIntegration /></ProtectedRoute>} /> */}
       </Routes>
     </div>
   );

@@ -76,7 +76,16 @@ export default function TreatmentLog() {
   const handleSubmit = (e) => {
     e.preventDefault();
     prepareDataForTransmission();
+  
+    // שמירת הנתונים ב-LocalStorage
+    const dataForStorage = {
+      ...treatmentData,
+      vitalSigns,
+    };
+    localStorage.setItem("treatmentLog", JSON.stringify(dataForStorage));
+    alert("הנתונים נשמרו בהצלחה!");
   };
+  
 
   return (
     <div className="p-4 bg-white rounded-lg shadow-lg max-w-md mx-auto">
