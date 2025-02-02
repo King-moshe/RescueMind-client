@@ -3,7 +3,7 @@ import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 import { HeartIcon, FireIcon, TrendingUpIcon } from '@heroicons/react/solid';
 import alertSound from '../sounds/sound-alert.mp3';
-
+ 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 export default function PatientMonitoring() {
